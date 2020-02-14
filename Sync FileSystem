@@ -1,0 +1,73 @@
+class FileSystem {
+    constructor(fileName){
+        this.fileName = fileName;
+    }
+
+    _initSync(fileName){
+        return new Promise(function(resolve, reject){
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+                fs.root.getFile(fileName, {create: true, exclusive: false}, function (fileEntry) {
+                    resolve(fileEntry);
+                }, function (e) {
+                    reject(e);
+                });
+            }, function (e) {
+                reject(e);
+            });
+        })
+    }
+
+    _saveSync(fileEntry, data){
+        return new Promise(function(resolve, reject){
+            let dataObj = null;
+            fileEntry.createWriter(function (fileWriter) {
+                fileWriter.onwriteend = function() {
+                    resolve();
+                };
+
+                fileWriter.onerror = function (e) {
+                    reject(e);
+                };
+
+                if (!dataObj) {
+                    dataObj = new Blob([data], { type: 'text/plain' });
+                }
+                fileWriter.write(dataObj);
+            });
+        })
+    }
+
+    _readSync(fileEntry){
+        return new Promise(function(resolve, reject){
+            fileEntry.file(function (file) {
+                let reader = new FileReader();
+                reader.onloadend = function() {
+                    resolve(this.result);
+                };
+                reader.readAsText(file);
+            }, function (e) {
+                reject(e);_
+            });
+        })
+    }
+
+    async saveSync(data){
+        try {
+            let fileEntry = await this._initSync(this.fileName);
+            await this._saveSync(fileEntry, data);
+            return Promise.resolve();
+        } catch(e){
+            return Promise.reject(e);
+        }
+    }
+
+    async readSync(){
+        try{
+            let fileEntry = await this._initSync(this.fileName);
+            let result = await this._readSync(fileEntry)
+            return Promise.resolve(result)
+        } catch(e){
+            return Promise.reject(e);
+        }
+    }
+ }
