@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!--
+  Customize this policy to fit your own app's needs. For more guidance, see:
+      https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+  Some notes:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+      * Enable inline JS: add 'unsafe-inline' to default-src
+  -->
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content: blob:" >
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+
+  <meta name="theme-color" content="#007aff">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>MyAppd</title>
+  
+  
+
+<script src="/js/painterro-1.0.35.min.js"></script>
+
+  <style type="text/css">
+    
+.grid {
+  position: relative;
+}
+
+.item {
+  width: 50%;
+  display: block;
+  position: absolute;
+
+  z-index: 1;
+}
+
+.item.muuri-item-dragging {
+  z-index: 3;
+}
+.item.muuri-item-releasing {
+  z-index: 2;
+}
+.item.muuri-item-hidden {
+  z-index: 0;
+}
+
+
+  </style>
+  
+  
+  <link rel="stylesheet" href="framework7/css/framework7.bundle.min.css">
+  <link rel="stylesheet" href="css/icons.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+
+  <div id="app">
+    <!-- Left panel with cover effect-->
+    <div class="panel panel-left panel-cover theme-dark panel-init">
+      <div class="view">
+        <div class="page">
+          <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+              <div class="title">Left Panel</div>
+            </div>
+          </div>
+          <div class="page-content">
+            <div class="block">Left panel content goes here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Right panel with reveal effect-->
+    <div class="panel panel-right panel-reveal theme-dark">
+      <div class="view">
+        <div class="page">
+          <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+              <div class="title">Right Panel</div>
+            </div>
+          </div>
+          <div class="page-content">
+            <div class="block">Right panel content goes here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Your main view, should have "view-main" class -->
+    <div class="view view-main view-init safe-areas">
+      <div class="page" data-name="home">
+        <!-- Top Navbar -->
+        <div class="navbar">
+          <div class="navbar-bg"></div>
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link icon-only panel-open" data-panel="left">
+                <i class="icon f7-icons if-not-md">menu</i>
+                <i class="icon material-icons if-md">menu</i>
+              </a>
+            </div>
+            <div class="title sliding">MyApp</div>
+            <div class="right">
+              <a href="#" class="link icon-only panel-open" data-panel="right">
+                <i class="icon f7-icons if-not-md">menu</i>
+                <i class="icon material-icons if-md">menu</i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Toolbar-->
+        <div class="toolbar toolbar-bottom">
+          <div class="toolbar-inner">
+            <a href="#" class="link">Left Link</a>
+            <a href="#" class="link">Right Link</a>
+          </div>
+        </div>
+
+        <!-- Scrollable page content-->
+        <div class="page-content">
+
+          <div id="editor">
+
+
+
+          </div>
+         
+<!--           <div class="grid">
+
+              <div class="item" data-id="1">
+             
+                  <div class="card">
+                    <div class="card-header">Card header 1</div>
+                    <div class="card-content card-content-padding">Card with header and footer. Card headers are used to display card titles and footers for additional information or just for custom actions.</div>
+                    <div class="card-footer">Card Footer</div>
+           
+                </div>
+              </div>
+
+              <div class="item" data-id="2">
+                  <div class="card">
+                    <div class="card-header">Card header 2</div>
+                    <div class="card-content card-content-padding">Card with header and footer. Card headers are used to display card titles and footers for additional information or just for custom actions.</div>
+                    <div class="card-footer">Card Footer</div>
+                </div>
+              </div>
+
+              <div class="item" data-id="3">
+                  <div class="card">
+                    <div class="card-header">Card header 3</div>
+                    <div class="card-content card-content-padding">The container element must be "positioned" meaning that it's CSS position property must be set to relative, absolute or fixed. Also note that Muuri automatically resizes the container element's width/height depending on the area the items cover and the layout algorithm configuration.
+The item elements must have their CSS position set to absolute and their display property set to block. Muuri actually enforces the display:block; rule and adds it as an inline style to all item elements, just in case.</div>
+                    <div class="card-footer">Card Footer</div>
+                </div>
+              </div>
+
+               <div class="item" data-id="4">
+                  <div class="card">
+                    <div class="card-header">Card header 4</div>
+                    <div class="card-content card-content-padding">Card with header and footer. Card headers are used to display card titles and footers for additional information or just for custom actions.</div>
+                    <div class="card-footer">Card Footer</div>
+                </div>
+              </div>
+
+               <div class="item" data-id="5">
+                  <div class="card">
+                    <div class="card-header">Card header 5</div>
+                    <div class="card-content card-content-padding">Card with header and footer. Card headers are used to display card titles and footers for additional information or just for custom actions.</div>
+                    <div class="card-footer">Card Footer</div>
+                </div>
+              </div>
+
+               <div class="item" data-id="6">
+                  <div class="card">
+                    <div class="card-header">Card header 6</div>
+                    <div class="card-content card-content-padding">Card with header and footer. Card headers are used to display card titles and footers for additional information or just for custom actions.</div>
+                    <div class="card-footer">Card Footer</div>
+                </div>
+              </div>
+
+               <div class="item" data-id="7">
+                  <div class="card">
+                    <div class="card-header">Card header 7</div>
+                    <div class="card-content card-content-padding">Card with header and footer. Card headers are used to display card titles and footers for additional information or just for custom actions.</div>
+                    <div class="card-footer">Card Footer</div>
+                </div>
+              </div>
+
+          </div> -->
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Popup -->
+    <div class="popup" id="my-popup">
+      <div class="view">
+        <div class="page">
+          <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+              <div class="title">Popup</div>
+              <div class="right">
+                <a href="#" class="link popup-close">Close</a>
+              </div>
+            </div>
+          </div>
+          <div class="page-content">
+            <div class="block">
+              <p>Popup content goes here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div class="login-screen" id="my-login-screen">
+      <div class="view">
+        <div class="page">
+          <div class="page-content login-screen-content">
+            <div class="login-screen-title">Login</div>
+            <div class="list">
+              <ul>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Username</div>
+                    <div class="item-input-wrap">
+                      
+                      <input type="text" name="username" placeholder="Your username">
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Password</div>
+                    <div class="item-input-wrap">
+                      
+                      <input type="password" name="password" placeholder="Your password">
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="list">
+              <ul>
+                <li>
+                  
+                  <a href="#" class="item-link list-button login-button">Sign In</a>
+                </li>
+              </ul>
+              <div class="block-footer">Some text about login information.<br>Click "Sign In" to close Login Screen</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <!-- CORDOVA_PLACEHOLDER_DONT_REMOVE -->
+  <!-- Framework7 library -->
+  <script src="framework7/js/framework7.bundle.min.js"></script>
+  <!-- Cordova APIs -->
+  <script src="js/cordova-app.js"></script>
+  <!-- App routes -->
+  <script src="js/routes.js"></script>
+  <!-- App scripts -->
+  <script src="js/app.js"></script>
+
+  <script src="https://unpkg.com/web-animations-js@2.3.2/web-animations.min.js"></script>
+  <script src="https://unpkg.com/muuri@0.8.0/dist/muuri.min.js"></script>
+
+  <script type="text/javascript">
+    var grid = new Muuri('.grid', {
+  dragEnabled: true,
+
+  showDuration: 300,
+  showEasing: 'ease',
+
+
+  hideDuration: 300,
+  hideEasing: 'ease',
+
+  visibleStyles: {
+    opacity: '1',
+    transform: 'scale(1)'
+  },
+  hiddenStyles: {
+    opacity: '0',
+    transform: 'scale(0.5)'
+  },
+
+  layout: {
+    fillGaps: true,
+    horizontal: false,
+    alignRight: false,
+    alignBottom: false,
+    rounding: false
+  },
+  layoutOnResize: 100,
+  layoutOnInit: true,
+  layoutDuration: 300,
+  layoutEasing: 'ease',
+
+  sortData: null,
+
+
+  dragContainer: null,
+  dragStartPredicate: {
+    distance: 0,
+    delay: 0,
+    handle: false
+  },
+  dragAxis: null,
+  dragSort: true,
+  dragSortHeuristics: {
+    sortInterval: 100,
+    minDragDistance: 10,
+    minBounceBackAngle: 1
+  },
+  dragSortPredicate: {
+    threshold: 50,
+    action: 'actionMove'
+  },
+  dragReleaseDuration: 300,
+  dragReleaseEasing: 'ease',
+  dragCssProps: {
+    touchAction: '#eee',
+    userSelect: '#eee',
+    userDrag: 'none',
+    tapHighlightColor: 'rgba(0, 0, 0, 0)',
+    touchCallout: 'none',
+    contentZooming: 'none'
+  },
+  dragPlaceholder: {
+    enabled: true,
+    duration: 300,
+    easing: 'ease',
+    createElement: null,
+    onCreate: null,
+    onRemove: null
+  },
+
+  containerClass: 'muuri',
+  itemClass: 'muuri-item',
+  itemVisibleClass: 'muuri-item-shown',
+  itemHiddenClass: 'muuri-item-hidden',
+  itemPositioningClass: 'muuri-item-positioning',
+  itemDraggingClass: 'muuri-item-dragging',
+  itemReleasingClass: 'muuri-item-releasing',
+  itemPlaceholderClass: 'muuri-item-placeholder',
+});
+
+
+grid.on('send', function (data) {
+  console.log(data);
+});
+
+grid.on('dragInit', function (item, event) {
+  console.log(event);
+  console.log(item);
+});
+
+
+grid.on('dragScroll', function (item, event) {
+  console.log(event);
+  console.log(item);
+});
+
+// grid.on('dragEnd', function (item, event) {
+//   console.log(event);
+//   console.log(item);
+// });
+
+// var grid = new Muuri('.grid', {
+//   layoutOnInit: false,
+//   sortData: {
+//     id: function (item, element) {
+//       return parseFloat(element.getAttribute('data-id'));
+//     }
+//   }
+// })
+// grid.sort('id');
+
+//<div class="item" data-id="1"></div>.
+
+grid.on('dragReleaseStart', function (item) {
+  var order = grid.getItems().map(item => item.getElement().getAttribute('data-id'))
+
+  console.log("order is: " + order)
+});
+  </script>
+
+  <script>
+  var paintero = Painterro( {initText: 'Press Prn Scr, Ctrl+V to paste a screenshot',
+    colorScheme: {
+      main: '#23282d',
+      control: '#444',
+      controlContent: '#cccccc',
+      activeControl: '#015c88',
+      activeControlContent: '#ffffff',
+      controlActiveControl: '#cccccc',
+      inputBackground: '#ffffff',
+      backgroundColor: '#999999',
+      dragOverBarColor: '#899dff',
+      hoverControl: '#191e23',
+      hoverControlContent: '#00b9eb',
+    },
+  });
+
+  paintero.isMobile = true;
+
+  paintero.show();
+
+$$('.ptro-holder-wrapper').css('z-index', "55555");
+
+</script>
+
+
+
+</body>
+</html>
