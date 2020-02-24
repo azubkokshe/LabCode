@@ -1,5 +1,11 @@
+        <div class="toolbar toolbar-bottom" style="mix-blend-mode: hard-light;">
+
+           <div class="toolbar-inner">
+              <a href="#" class="link" style="color: white;"><i class="icon material-icons md-only">android</i></a>
+            </div>
+
                    <div class="fab fab-extended fab-right-bottom color-red" style="top: -30px;">
-<div style="width: 59px;position: absolute;height: 66px;border-radius: 41px;background-color: gray;right: -6px;top: -10px;"></div>
+<div style="width: 59px;position: absolute;height: 66px;border-radius: 41px;background-color: gray;right: -4px;top: -10px;"></div>
                    <a href="#">
                     <i class="icon material-icons md-only">add</i>
                   </a>
