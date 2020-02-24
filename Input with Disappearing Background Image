@@ -1,0 +1,30 @@
+This replicates the functionality of the standard embeddable Google Search fields. They have an image in the background and when the input is clicked into, the image disappears.
+
+<form name="searchform" id="search-form">
+   <div>
+       <b>Search</b>
+       <input type="text" name="txtInput" title="Enter the terms you wish to search for." />
+       <input type="submit" value="GO!" class="submit" style="cursor: pointer;" />
+   </div>
+</form>
+JavaScript underneath form markup:
+
+<script type="text/javascript" language="javascript">
+ (function() {
+    var id = document.getElementById('search-form');
+    if (id && id.txtInput) {
+      var name = id.txtInput;
+      var unclicked = function() {
+          if (name.value == '') {
+              name.style.background = '#FFFFFF url(images/googbg.png) left no-repeat';
+          }
+       };
+       var clicked = function() {
+          name.style.background = '#ffffff';
+       };
+    name.onfocus = clicked;
+    name.onblur = unclicked;
+    unclicked();
+    }
+  })();
+</script>
