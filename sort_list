@@ -1,0 +1,69 @@
+
+
+			<div class="list sortable">
+			  <ul>
+			    <li class="swipeout">
+
+					
+
+					<div class="item-content swipeout-content">
+
+						<label class="item-checkbox">
+							<input type="checkbox" name="demo-media-checkbox" value="1"/>
+						    <i class="icon icon-checkbox"></i>
+						</label>
+
+				        <div class="item-inner">
+								<div class="item-title">
+									
+								<div contenteditable="true" class="record" autocorrect="off" style="width: 100%;">dsfddf</div>
+
+
+								</div>
+								<div class="item-after"  style="margin-right:7px; color: #00ffa0; font-size: 10px;">
+								        1231332  	
+
+								</div>
+							</div>
+					</div>
+
+					
+					
+					<div class="swipeout-actions-left">
+        <a href="#" class="reply">More</a>
+        <a href="#" class="forward">Delete</a>
+      </div>
+
+      <div class="sortable-handler"></div>
+					
+			    </li>
+			    <li>
+			     <label class="item-checkbox item-content">
+						<input type="checkbox" name="demo-media-checkbox" value="1"/>
+					        <i class="icon icon-checkbox"></i>
+					        <div class="item-inner">
+								<div class="item-title">Ivan Petrov</div>
+								<div class="item-after">
+								          	
+
+								</div>
+							</div>
+					</label>
+					<div class="sortable-handler"></div>
+			    </li>
+			    <li>
+			     <label class="item-checkbox item-content">
+						<input type="checkbox" name="demo-media-checkbox" value="1"/>
+					        <i class="icon icon-checkbox"></i>
+					        <div class="item-inner">
+								<div class="item-title">Ivan Petrov</div>
+								<div class="item-after">
+								          	
+
+								</div>
+							</div>
+					</label>
+					<div class="sortable-handler"></div>
+			    </li>
+			  </ul>
+			</div>
